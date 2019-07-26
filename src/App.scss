@@ -1,0 +1,27 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  display: grid;
+  grid-template-rows: 1fr 4fr;
+  grid-template-columns: 1fr 8fr;
+  grid-gap: 20px;
+  grid-template-areas:
+    'h h'
+    'mn c'
+  ;
+}
+
+.app_header {
+  grid-area: h;
+}
+
+.app_main_nav {
+  grid-area: mn;
+}
+
+.app_content {
+  grid-area: c;
+}
