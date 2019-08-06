@@ -1,0 +1,36 @@
+.messages {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+
+  background-color: chocolate;
+}
+
+.sendMessageContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 300px;
+}
+
+.textarea {
+  margin: 5px;
+
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.sendMessageButton {
+  padding: 10px;
+
+  background-color: dodgerblue;
+  border: none;
+  border-radius: 5px;
+  text-transform: uppercase;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

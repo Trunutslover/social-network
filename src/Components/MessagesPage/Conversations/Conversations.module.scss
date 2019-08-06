@@ -1,0 +1,19 @@
+.conversations {
+  background-color: white;
+}
+
+.conversationsUser {
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.conversationsUserLink {
+  display: block;
+  padding: 20px;
+
+  color: #4d76a3;
+  text-decoration: none;
+
+  &:hover {
+    background-color: #eeeeee;
+  }
+}

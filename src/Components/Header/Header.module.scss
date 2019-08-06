@@ -1,3 +1,40 @@
 .header {
-  background-color: chartreuse;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  height: 70px;
+
+  box-sizing: border-box;
+
+  background-color: #4d76a3;
+}
+
+.headerLogo {
+
+}
+
+.headerSearch {
+  width: 130px;
+  height: 20px;
+  padding: 0 10px;
+
+  box-sizing: border-box;
+
+  color: white;
+  background-color: #375e88;
+  border: none;
+  border-radius: 3px;
+
+  &::placeholder {
+    color: white;
+  }
+}
+
+.headerMenuItem {
+  color: #375e88;
+
+  &:hover {
+    cursor: pointer;
+  }
 }

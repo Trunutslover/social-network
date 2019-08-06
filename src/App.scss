@@ -7,7 +7,6 @@ body {
   display: grid;
   grid-template-rows: 1fr 4fr;
   grid-template-columns: 1fr 8fr;
-  grid-gap: 20px;
   grid-template-areas:
     'h h'
     'mn c'
@@ -20,8 +19,12 @@ body {
 
 .app_main_nav {
   grid-area: mn;
+
+  box-sizing: border-box;
 }
 
 .app_content {
   grid-area: c;
+
+  box-sizing: border-box;
 }
