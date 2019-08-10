@@ -6,13 +6,19 @@ import {Route} from "react-router-dom";
 
 function MessagesPage(props) {
     const listOfMessages = props.conversations.map((value, index) => {
-        return <Route key={index} path={`/messages/${index}`} render={() => <Messages
-            messages={props.conversations[index].messages}
-            index={index}
-            newMessage={props.conversations[index].newMessage}
-            changeNewMessage={props.changeNewMessage}
-            addMessage={props.addMessage}
-             />} />
+        return <Route key={index} path={`/messages/${index}`} render={() => {
+            return (
+                <Messages
+                    messages={props.conversations[index].messages}
+                    index={index}
+                    avatar={props.conversations[index].avatar}
+                    author={props.conversations[index].author}
+                    newMessage={props.conversations[index].newMessage}
+                    changeNewMessage={props.changeNewMessage}
+                    addMessage={props.addMessage}
+                />
+            );
+        }} />
     });
 
     return (

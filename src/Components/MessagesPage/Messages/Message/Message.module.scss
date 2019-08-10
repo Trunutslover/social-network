@@ -1,10 +1,59 @@
-.message {
-  width: 300px;
-  margin: 5px;
-  padding: 10px;
+.messageContainer {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+
+  //width: 300px;
+  margin: 10px 20px;
 
   box-sizing: border-box;
+}
 
-  background-color: rgba(255, 255, 255, 0.7);
+.messageAvatar {
+  margin-right: 20px;
+
+  border-radius: 50%;
+}
+
+.message {
+  margin: 0;
+  padding: 20px 10px;
+
+  position: relative;
+
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 5px;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: calc(50% - 5px);
+    left: -5px;
+
+    width: 10px;
+    height: 10px;
+
+    transform: rotate(45deg);
+
+    background-color: rgba(255, 255, 255, 1);
+  }
+}
+
+.messageContainerSelf {
+  align-self: flex-end;
+}
+
+.messageAvatarSelf {
+  order: 2;
+
+  margin: 0;
+}
+
+.messageSelf {
+  margin-right: 20px;
+
+  &::before {
+    left: calc(100% - 5px);
+  }
 }

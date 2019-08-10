@@ -3,11 +3,12 @@
 }
 
 .conversationsUser {
-  border-bottom: 1px solid #aaaaaa;
+  border-bottom: 1px solid #efefef;
 }
 
 .conversationsUserLink {
-  display: block;
+  display: flex;
+  align-items: center;
   padding: 20px;
 
   color: #4d76a3;
@@ -16,4 +17,22 @@
   &:hover {
     background-color: #eeeeee;
   }
+}
+
+.conversationsAvatar {
+  margin-right: 20px;
+
+  border-radius: 50%;
+}
+
+.conversationsContainer {
+
+}
+
+.conversationsAuthor {
+  margin: 0;
+}
+
+.conversationsStatus {
+  margin: 0;
 }

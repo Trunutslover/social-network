@@ -7,7 +7,7 @@ import FriendsPageContainer from "./Components/FriendsPage/FriendsPageContainer"
 import MessagesPageContainer from "./Components/MessagesPage/MessagesPageContainer";
 
 
-function App(props) {
+function App() {
   return (
       <div className={'app'}>
           <Header />

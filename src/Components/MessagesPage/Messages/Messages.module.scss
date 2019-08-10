@@ -4,7 +4,7 @@
   justify-content: flex-end;
   align-items: center;
 
-  background-color: chocolate;
+  background-color: #efefef;
 }
 
 .sendMessageContainer {
@@ -12,25 +12,44 @@
   justify-content: space-between;
   align-items: center;
 
-  width: 300px;
+  width: 100%;
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  background-color: #fafafa;
 }
 
 .textarea {
-  margin: 5px;
+  height: 36px;
 
-  border: 1px solid black;
-  border-radius: 5px;
+  flex-grow: 1;
+
+  padding: 10px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #efefef;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
 .sendMessageButton {
-  padding: 10px;
+  height: 36px;
 
-  background-color: dodgerblue;
+  padding: 10px 30px;
+
+  box-sizing: border-box;
+
+  color: white;
+  background-color: #4d76a3;
   border: none;
-  border-radius: 5px;
-  text-transform: uppercase;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
 
   &:hover {
     cursor: pointer;
+    background-color: #375e88;
   }
 }

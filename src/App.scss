@@ -5,7 +5,6 @@ body {
 
 .app {
   display: grid;
-  grid-template-rows: 1fr 4fr;
   grid-template-columns: 1fr 8fr;
   grid-template-areas:
     'h h'
@@ -20,11 +19,15 @@ body {
 .app_main_nav {
   grid-area: mn;
 
+  height: calc(100vh - 70px);
+
   box-sizing: border-box;
 }
 
 .app_content {
   grid-area: c;
+
+  height: calc(100vh - 70px);
 
   box-sizing: border-box;
 }
