@@ -3,12 +3,14 @@ const SET_TOTAL_COUNT = 'SET_TOTAL_COUNT';
 const SELECT_PAGE = 'SELECT_PAGE';
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
 const initialState = {
     users: [],
     totalCount: 0,
     page: 1,
-    count: 10
+    count: 10,
+    isFetching: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -55,6 +57,12 @@ const usersReducer = (state = initialState, action) => {
                 })
             };
 
+        case TOGGLE_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            };
+
         default: return state;
     }
 };
@@ -80,3 +88,7 @@ export const followAC = (user) => {
 export const unfollowAC = (user) => {
     return {type: UNFOLLOW, user}
 };
+
+export const toggleFetchingAC = (isFetching) => {
+    return {type: TOGGLE_FETCHING, isFetching}
+}
