@@ -54,7 +54,14 @@ const messagesReducer = (state = initialState, action) => {
                 ...state,
                 conversations: state.conversations.map((value, index) => {
                     if(index === action.index) {
-                        return {...value, messages: [...value.messages, {message: value.newMessage, author: `Alex Ivanenko`}], newMessage: ``}
+                        return {
+                            ...value,
+                            messages: [
+                                ...value.messages,
+                                {message: value.newMessage, author: `Alex Ivanenko`}
+                                ],
+                            newMessage: ``
+                        }
                     }
 
                     return value;

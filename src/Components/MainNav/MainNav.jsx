@@ -7,6 +7,7 @@ function MainNav(props) {
         <nav className={`app_main_nav ${classes.main_nav}`}>
             <li><NavLink to={'/friends'} className={classes.main_nav_link} activeClassName={classes.main_nav_link_active}>Friends</NavLink></li>
             <li><NavLink to={'/messages'} className={classes.main_nav_link} activeClassName={classes.main_nav_link_active}>Messages</NavLink></li>
+            <li><NavLink to={'/users'} className={classes.main_nav_link} activeClassName={classes.main_nav_link_active}>Users</NavLink></li>
         </nav>
     )
 }
