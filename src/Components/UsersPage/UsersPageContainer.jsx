@@ -9,36 +9,38 @@ import {
     unfollow
 } from "../../redux/users-reducer";
 import React from "react";
-import * as axios from "axios";
 import Preloader from "../common/Preloader/Preloader";
+import {getUsers} from "../../api/api";
 
 class UsersPageContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.toggleFetching(true);
         this.props.selectPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${pageNumber}`, {withCredentials: true})
-            .then(response => {
+
+        getUsers(this.props.count, pageNumber)
+            .then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
+                this.props.setUsers(data.items);
             })
-    }
+    };
 
     componentDidMount() {
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.page}`, {withCredentials: true})
-            .then(response => {
+
+        getUsers(this.props.count, this.props.page)
+            .then(data => {
                 this.props.toggleFetching(false);
-                this.props.setUsers(response.data.items);
-                this.props.setTotalCount(response.data.totalCount);
+                this.props.setUsers(data.items);
+                this.props.setTotalCount(data.totalCount);
             })
             .catch(error => console.log(error))
-    }
+    };
 
     render() {
         return (
             <>
-            {this.props.isFetching
-                    ? <Preloader />
+                {this.props.isFetching
+                    ? <Preloader/>
                     : <UsersPage
                         count={this.props.count}
                         totalCount={this.props.totalCount}
@@ -48,7 +50,7 @@ class UsersPageContainer extends React.Component {
                         page={this.props.page}
                         onPageChanged={this.onPageChanged}
                     />
-            }
+                }
             </>
         )
     }
@@ -65,12 +67,12 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-        setUsers,
-        setTotalCount,
-        selectPage,
-        follow,
-        unfollow,
-        toggleFetching
+    setUsers,
+    setTotalCount,
+    selectPage,
+    follow,
+    unfollow,
+    toggleFetching
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPageContainer);
