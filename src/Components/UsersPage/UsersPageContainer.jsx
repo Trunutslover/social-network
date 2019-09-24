@@ -16,7 +16,7 @@ class UsersPageContainer extends React.Component {
     onPageChanged = (pageNumber) => {
         this.props.toggleFetching(true);
         this.props.selectPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${pageNumber}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${pageNumber}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleFetching(false);
                 this.props.setUsers(response.data.items);
@@ -25,7 +25,7 @@ class UsersPageContainer extends React.Component {
 
     componentDidMount() {
         this.props.toggleFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.page}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.count}&page=${this.props.page}`, {withCredentials: true})
             .then(response => {
                 this.props.toggleFetching(false);
                 this.props.setUsers(response.data.items);
@@ -45,6 +45,7 @@ class UsersPageContainer extends React.Component {
                         users={this.props.users}
                         follow={this.props.follow}
                         unfollow={this.props.unfollow}
+                        page={this.props.page}
                         onPageChanged={this.onPageChanged}
                     />
             }

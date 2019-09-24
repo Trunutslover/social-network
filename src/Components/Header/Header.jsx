@@ -11,6 +11,7 @@ function Header(props) {
             <div className={classes.headerMenuItem}>Games</div>
             <div className={classes.headerMenuItem}>Music</div>
             <div className={classes.headerMenuItem}>Help</div>
+            <div>{props.isAuth ? props.login : `Click to login`}</div>
         </header>
     )
 }
