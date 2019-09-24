@@ -31,8 +31,8 @@ export default function UsersPage(props) {
                     {value.followed
                         ? <button onClick={() => {
                             delFollow(value.id)
-                                .then((response) => {
-                                    if (response.data.resultCode === 0) {
+                                .then((data) => {
+                                    if (data.resultCode === 0) {
                                         props.unfollow(value.id)
                                     }
                                 });
@@ -42,8 +42,8 @@ export default function UsersPage(props) {
 
                         : <button onClick={() => {
                             postFollow(value.id)
-                                .then((response) => {
-                                    if (response.data.resultCode === 0) {
+                                .then((data) => {
+                                    if (data.resultCode === 0) {
                                         props.follow(value.id)
                                     }
                                 });
