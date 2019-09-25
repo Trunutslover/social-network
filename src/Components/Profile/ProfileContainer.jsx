@@ -1,21 +1,16 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {setUserProfileThunkCreator} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withRouter} from "react-router-dom";
-import {getProfile} from "../../api/api";
 
 class ProfileContainer extends React.Component{
     componentDidMount() {
-        getProfile(this.props.match.params.userId)
-            .then(data => {
-                this.props.setUserProfile(data)
-            })
+        this.props.setUserProfileThunkCreator(this.props.match.params.userId);
     }
 
     render() {
-
         if(!this.props.userProfile) {
             return <Preloader />
         }
@@ -33,7 +28,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    setUserProfile
+    setUserProfileThunkCreator
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileContainer));

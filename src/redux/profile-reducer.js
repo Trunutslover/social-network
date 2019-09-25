@@ -1,3 +1,6 @@
+/*Импорты*/
+import {getProfile} from "../api/api";
+
 /* Экшены */
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
@@ -25,5 +28,15 @@ export const setUserProfile = (userProfile) => {
     return {
         type: SET_USER_PROFILE,
         userProfile
+    }
+};
+
+/* Санк криэйторы */
+export const setUserProfileThunkCreator = (userId) => {
+    return (dispatch) => {
+        getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
     }
 };

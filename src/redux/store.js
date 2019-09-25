@@ -1,9 +1,10 @@
-import {combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import friendsReducer from "./friends-reducer";
 import messagesReducer from "./messages-reducer";
 import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
 import authReducer from "./auth-reducer";
+import thunkMiddleware from "redux-thunk";
 
 const reducers = combineReducers({
     friendsPage: friendsReducer,
@@ -13,7 +14,7 @@ const reducers = combineReducers({
     auth: authReducer
 });
 
-const store = createStore(reducers);
+const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 export const dispatch = (action) => {
     store.getState().friendsPage = friendsReducer(store.getState().friendsPage, action);

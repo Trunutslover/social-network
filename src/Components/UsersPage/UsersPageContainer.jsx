@@ -1,39 +1,22 @@
 import {connect} from "react-redux";
 import UsersPage from "./UsersPage";
 import {
-    follow,
+    followThunkCreator, getUsersThunkCreator,
     selectPage,
-    setTotalCount,
-    setUsers,
-    toggleFetching,
-    unfollow
+    toggleFollowing,
+    unfollowThunkCreator
 } from "../../redux/users-reducer";
 import React from "react";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
 
 class UsersPageContainer extends React.Component {
     onPageChanged = (pageNumber) => {
-        this.props.toggleFetching(true);
         this.props.selectPage(pageNumber);
-
-        getUsers(this.props.count, pageNumber)
-            .then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(data.items);
-            })
+        this.props.getUsersThunkCreator(this.props.count, pageNumber);
     };
 
     componentDidMount() {
-        this.props.toggleFetching(true);
-
-        getUsers(this.props.count, this.props.page)
-            .then(data => {
-                this.props.toggleFetching(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalCount(data.totalCount);
-            })
-            .catch(error => console.log(error))
+        this.props.getUsersThunkCreator(this.props.count, this.props.page)
     };
 
     render() {
@@ -45,10 +28,11 @@ class UsersPageContainer extends React.Component {
                         count={this.props.count}
                         totalCount={this.props.totalCount}
                         users={this.props.users}
-                        follow={this.props.follow}
-                        unfollow={this.props.unfollow}
                         page={this.props.page}
                         onPageChanged={this.onPageChanged}
+                        usersFollowing={this.props.usersFollowing}
+                        followThunkCreator={this.props.followThunkCreator}
+                        unfollowThunkCreator={this.props.unfollowThunkCreator}
                     />
                 }
             </>
@@ -62,17 +46,17 @@ const mapStateToProps = (state) => {
         page: state.usersPage.page,
         count: state.usersPage.count,
         totalCount: state.usersPage.totalCount,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        usersFollowing: state.usersPage.usersFollowing,
     }
 };
 
 const mapDispatchToProps = {
-    setUsers,
-    setTotalCount,
     selectPage,
-    follow,
-    unfollow,
-    toggleFetching
+    toggleFollowing,
+    getUsersThunkCreator,
+    followThunkCreator,
+    unfollowThunkCreator
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPageContainer);

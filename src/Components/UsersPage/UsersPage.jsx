@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './UsersPage.module.scss';
 import userpic from '../../assets/Userpic.png'
 import {NavLink} from "react-router-dom";
-import {delFollow, postFollow} from "../../api/api";
 
 export default function UsersPage(props) {
     const pagesCount = Math.ceil(props.totalCount / props.count);
@@ -17,7 +16,9 @@ export default function UsersPage(props) {
         return <button key={index} className={`${classes.pageButton} ${value === props.page && classes.activePage}`}
                        onClick={() => {
                            props.onPageChanged(value)
-                       }}>{value}</button>
+                       }}>
+            {value}
+        </button>
     });
 
     const userList = props.users.map((value) => {
@@ -29,24 +30,14 @@ export default function UsersPage(props) {
                              height="40px"/>
                     </NavLink>
                     {value.followed
-                        ? <button onClick={() => {
-                            delFollow(value.id)
-                                .then((data) => {
-                                    if (data.resultCode === 0) {
-                                        props.unfollow(value.id)
-                                    }
-                                });
+                        ? <button disabled={props.usersFollowing.some(userId => userId === value.id)} onClick={() => {
+                            props.unfollowThunkCreator(value.id)
                         }}>
                             Unfollow
                         </button>
 
-                        : <button onClick={() => {
-                            postFollow(value.id)
-                                .then((data) => {
-                                    if (data.resultCode === 0) {
-                                        props.follow(value.id)
-                                    }
-                                });
+                        : <button disabled={props.usersFollowing.some(userId => userId === value.id)} onClick={() => {
+                            props.followThunkCreator(value.id)
                         }}>
                             Follow
                         </button>
