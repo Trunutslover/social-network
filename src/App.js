@@ -7,6 +7,7 @@ import MessagesPageContainer from "./Components/MessagesPage/MessagesPageContain
 import UsersPageContainer from "./Components/UsersPage/UsersPageContainer";
 import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
+import Login from "./Components/Login/Login";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path='/messages' render={() => <MessagesPageContainer />} />
           <Route path='/users' render={() => <UsersPageContainer />} />
           <Route path='/profile/:userId' render={() => <ProfileContainer/>} />
+          <Route path='/login' render={() => <Login />} />
       </div>
   );
 }

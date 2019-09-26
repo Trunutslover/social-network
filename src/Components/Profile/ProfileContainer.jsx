@@ -3,7 +3,9 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {setUserProfileThunkCreator} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
+import {compose} from "redux";
 
 class ProfileContainer extends React.Component{
     componentDidMount() {
@@ -31,4 +33,8 @@ const mapDispatchToProps = {
     setUserProfileThunkCreator
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProfileContainer));
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps),
+    withRouter
+)(ProfileContainer);
