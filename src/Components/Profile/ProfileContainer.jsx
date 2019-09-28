@@ -9,7 +9,7 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component{
     componentDidMount() {
-        this.props.setUserProfileThunkCreator(this.props.match.params.userId);
+        this.props.setUserProfileThunkCreator(this.props.match.params.userId || this.props.myId);
     }
 
     render() {
@@ -25,7 +25,8 @@ class ProfileContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return {
-        userProfile: state.profile.userProfile
+        userProfile: state.profile.userProfile,
+        myId: state.auth.id
     }
 };
 

@@ -20,6 +20,7 @@ function App() {
           <Route path='/users' render={() => <UsersPageContainer />} />
           <Route path='/profile/:userId' render={() => <ProfileContainer/>} />
           <Route path='/login' render={() => <Login />} />
+          <Route path='/myprofile' render={() => <ProfileContainer/>} />
       </div>
   );
 }
