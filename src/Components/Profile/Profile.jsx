@@ -5,13 +5,26 @@ import userpic from '../../assets/Userpic.png';
 export default class Profile extends React.Component {
     state = {
         editStatus: false,
-        status: `I'm a react developer!`
+        status: this.props.status
     };
 
-    toggleEditStatus = () => {
+    onChangeStatus = (e) => {
         this.setState({
-            editStatus: !this.state.editStatus
+            status: e.target.value
         })
+    };
+
+    enableEditStatus = () => {
+        this.setState({
+            editStatus: true
+        })
+    };
+
+    disableEditStatus = () => {
+        this.setState({
+            editStatus: false
+        });
+        this.props.putMyStatus(this.state.status);
     };
 
     render() {
@@ -21,8 +34,8 @@ export default class Profile extends React.Component {
                 <img src={this.props.userProfile.photos.large || userpic} alt={`Avatar`}/>
                 <div>
                     {this.state.editStatus
-                        ? <input value={this.state.status} onBlur={this.toggleEditStatus} autoFocus={true}/>
-                        : <p onClick={this.toggleEditStatus}>{this.state.status}</p>
+                        ? <input value={this.state.status} onBlur={this.disableEditStatus} autoFocus={true} onChange={this.onChangeStatus}/>
+                        : <p onClick={this.props.userProfile.userId === this.props.myId && this.enableEditStatus}>{this.props.status || (this.props.userProfile.userId === this.props.myId && `Click here to change status`)}</p>
                     }
                 </div>
             </div>

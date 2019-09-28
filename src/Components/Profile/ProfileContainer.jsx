@@ -1,7 +1,7 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {setUserProfileThunkCreator} from "../../redux/profile-reducer";
+import {putMyStatusThunkCreator, setStatusThunkCreator, setUserProfileThunkCreator} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
@@ -10,6 +10,7 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component{
     componentDidMount() {
         this.props.setUserProfileThunkCreator(this.props.match.params.userId || this.props.myId);
+        this.props.setStatusThunkCreator(this.props.match.params.userId || this.props.myId);
     }
 
     render() {
@@ -18,7 +19,11 @@ class ProfileContainer extends React.Component{
         }
 
         return (
-            <Profile userProfile={this.props.userProfile}/>
+            <Profile
+                userProfile={this.props.userProfile}
+                status={this.props.status}
+                myId={this.props.myId}
+                putMyStatus={this.props.putMyStatusThunkCreator}/>
         )
     }
 }
@@ -26,12 +31,15 @@ class ProfileContainer extends React.Component{
 const mapStateToProps = (state) => {
     return {
         userProfile: state.profile.userProfile,
-        myId: state.auth.id
+        myId: state.auth.id,
+        status: state.profile.status
     }
 };
 
 const mapDispatchToProps = {
-    setUserProfileThunkCreator
+    setUserProfileThunkCreator,
+    setStatusThunkCreator,
+    putMyStatusThunkCreator
 };
 
 export default compose(

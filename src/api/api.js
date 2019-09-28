@@ -32,3 +32,13 @@ export const delFollow = (userId) => {
     return instance.delete(`follow/${userId}`)
         .then(response => response.data);
 };
+
+export const getStatus = (userId) => {
+    return instance.get(`profile/status/${userId}`)
+        .then(response => response.data)
+};
+
+export const putMyStatus = (status) => {
+    return instance.put(`profile/status`, {status})
+        .then(response => response.data)
+};
