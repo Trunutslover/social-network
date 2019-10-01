@@ -6,7 +6,7 @@ const instance = axios.create({
     headers: {
         "API-KEY": "16aedc44-935d-40d8-a8b8-3857bd3be2f3"
     }
-})
+});
 
 export const getUsers = (count = 10, pageNumber = 1) => {
     return instance.get(`users?count=${count}&page=${pageNumber}`)
@@ -40,5 +40,15 @@ export const getStatus = (userId) => {
 
 export const putMyStatus = (status) => {
     return instance.put(`profile/status`, {status})
+        .then(response => response.data)
+};
+
+export const postLogin = (email, password, rememberMe) => {
+    return instance.post(`auth/login`, {email, password, rememberMe})
+        .then(response => response.data)
+};
+
+export const delLogin = () => {
+    return instance.delete(`auth/login`)
         .then(response => response.data)
 };

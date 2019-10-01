@@ -1,6 +1,6 @@
 import MessagesPage from "./MessagesPage";
 import {connect} from "react-redux";
-import {addMessageActionCreator, changeNewMessageActionCreator} from "../../redux/messages-reducer";
+import {addMessageActionCreator} from "../../redux/messages-reducer";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
@@ -12,11 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        changeNewMessage: (text, index) => {
-            dispatch(changeNewMessageActionCreator(text, index))
-        },
-        addMessage: (index) => {
-            dispatch(addMessageActionCreator(index))
+        addMessage: (index, message) => {
+            dispatch(addMessageActionCreator(index, message))
         }
     }
 };

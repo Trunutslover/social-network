@@ -5,23 +5,19 @@ import usersReducer from "./users-reducer";
 import profileReducer from "./profile-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
+import {reducer as formReducer} from "redux-form";
 
 const reducers = combineReducers({
     friendsPage: friendsReducer,
     messagesPage: messagesReducer,
     usersPage: usersReducer,
     profile: profileReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-export const dispatch = (action) => {
-    store.getState().friendsPage = friendsReducer(store.getState().friendsPage, action);
-    store.getState().messagesPage = messagesReducer(store.getState().messagesPage, action);
-    store.getState().usersPage = usersReducer(store.getState().usersPage, action);
-    store.getState().profile = profileReducer(store.getState().profile, action);
-    store.getState().auth = authReducer(store.getState().auth, action);
-};
-
 export default store;
+
+window.store = store;

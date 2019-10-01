@@ -13,8 +13,6 @@ function MessagesPage(props) {
                     index={index}
                     avatar={props.conversations[index].avatar}
                     author={props.conversations[index].author}
-                    newMessage={props.conversations[index].newMessage}
-                    changeNewMessage={props.changeNewMessage}
                     addMessage={props.addMessage}
                 />
             );

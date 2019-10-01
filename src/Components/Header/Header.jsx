@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './Header.module.scss';
 import logo from '../../assets/Logo.png'
+import {NavLink} from "react-router-dom";
 
 function Header(props) {
     return (
@@ -11,7 +12,7 @@ function Header(props) {
             <div className={classes.headerMenuItem}>Games</div>
             <div className={classes.headerMenuItem}>Music</div>
             <div className={classes.headerMenuItem}>Help</div>
-            <div>{props.isAuth ? props.login : `Click to login`}</div>
+            <div>{props.isAuth ? <div>{props.login} <button onClick={props.logout}>Logout</button></div> : <NavLink to={`/login`}>Click to login</NavLink>}</div>
         </header>
     )
 }

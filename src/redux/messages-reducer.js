@@ -8,8 +8,7 @@ const initialState = {
                 {message: `Yo man!`, author: `Vasiliy Pukin`},
                 {message: `How are you?`, author: `Vasiliy Pukin`},
                 {message: `What about tomorrow?`, author: `Vasiliy Pukin`}
-            ],
-            newMessage: ``
+            ]
         },
         {
             author: `Kolya Zveno`,
@@ -18,8 +17,7 @@ const initialState = {
             messages: [
                 {message: `Hey!`, author: `Kolya Zveno`},
                 {message: `What's up?`, author: `Kolya Zveno`}
-            ],
-            newMessage: ``
+            ]
         },
         {
             author: `Tasya Kenko`,
@@ -28,39 +26,24 @@ const initialState = {
             messages: [
                 {message: `Hello, my friend`, author: `Tasya Kenko`},
                 {message: `I am so tired`, author: `Tasya Kenko`},
-            ],
-            newMessage: ``
+            ]
         },
     ]
 };
 
 const messagesReducer = (state = initialState, action) => {
     switch (action.type) {
-        case `CHANGE-NEW-MESSAGE`:
-            return  {
-                ...state,
-                conversations: state.conversations.map((value, index) => {
-                        if (index === action.index) {
-                            return {...value, newMessage: action.message}
-                        }
-
-                        return value;
-                    }
-                )
-            };
-
         case `ADD-MESSAGE`:
-            return  {
+            return {
                 ...state,
                 conversations: state.conversations.map((value, index) => {
-                    if(index === action.index) {
+                    if (index === action.index) {
                         return {
                             ...value,
                             messages: [
                                 ...value.messages,
-                                {message: value.newMessage, author: `Alex Ivanenko`}
-                                ],
-                            newMessage: ``
+                                {message: action.message, author: `Alex Ivanenko`}
+                            ]
                         }
                     }
 
@@ -73,12 +56,8 @@ const messagesReducer = (state = initialState, action) => {
     }
 };
 
-export const changeNewMessageActionCreator = (index, event) => {
-    return {type: `CHANGE-NEW-MESSAGE`, message: event.target.value, index: index}
-};
-
-export const addMessageActionCreator = (index) => {
-    return {type: `ADD-MESSAGE`, index: index}
+export const addMessageActionCreator = (index, message) => {
+    return {type: `ADD-MESSAGE`, index, message}
 };
 
 export default messagesReducer;

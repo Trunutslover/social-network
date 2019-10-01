@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Messages.module.scss';
 import Message from "./Message/Message";
 import myAvatar from '../../../assets/MyAvatar.jpg'
+import {Field, reduxForm} from "redux-form";
 
 function Messages(props) {
     const messagesList = props.messages.map((value, index) => {
@@ -10,17 +11,32 @@ function Messages(props) {
                 key={index}
                 message={value.message}
                 avatar={value.author === props.author ? props.avatar : myAvatar}
-                self={value.author === props.author ? false : true} />
-            )
+                self={value.author === props.author ? false : true}/>
+        )
     });
+
+    const MessageForm = (props) => {
+        return (
+            <form className={classes.sendMessageContainer} onSubmit={props.handleSubmit}>
+                <Field component={`input`}
+                       className={classes.textarea}
+                       name={`newMessage`}
+                       placeholder="Enter your message"/>
+                <button type={`submit`} className={classes.sendMessageButton}>Send</button>
+            </form>
+        )
+    };
+
+    const MessageReduxForm = reduxForm({form: `message${props.index}`})(MessageForm);
+
+    const addMessage = (formData) => {
+        props.addMessage(props.index, formData.newMessage)
+    };
 
     return (
         <div className={classes.messages}>
             {messagesList}
-            <div className={classes.sendMessageContainer}>
-                <input className={classes.textarea} value={props.newMessage} onChange={props.changeNewMessage.bind(null, props.index)} placeholder="Enter your message"/>
-                <button className={classes.sendMessageButton} onClick={props.addMessage.bind(null, props.index)}>Send</button>
-            </div>
+            <MessageReduxForm onSubmit={addMessage} />
         </div>
     )
 }
