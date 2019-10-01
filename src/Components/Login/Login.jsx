@@ -4,27 +4,35 @@ import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {loginThunkCreator} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import {maxLength, required} from "../../utils/validation";
+import Input from "../common/FormComponents/Input/Input";
+
+const maxLength30 = maxLength(30);
 
 function LoginForm(props) {
     return (
         <form onSubmit={props.handleSubmit}>
-            <label>
-                Enter your login:
-                <br/>
-                <Field component={`input`} name="email" placeholder="login here" />
-            </label>
-            <br/>
-            <label>
-                Enter your password:
-                <br/>
-                <Field component={`input`} type={"password"} name="password" placeholder="password here" />
-            </label>
-            <br/>
-            <label>
-                <Field component={`input`} type={"checkbox"} name="rememberMe" />
-                remember me
-            </label>
-            <br/>
+            <Field
+                component={Input}
+                name="email"
+                placeholder="login here"
+                label={`Enter your login:`}
+                validate={[maxLength30, required]}
+            />
+            <Field
+                component={Input}
+                type={"password"}
+                name="password"
+                placeholder="password here"
+                label={`Enter your password:`}
+                validate={[maxLength30, required]}
+            />
+            <Field
+                component={Input}
+                type={"checkbox"}
+                name="rememberMe"
+                label={`remember me`}
+            />
             <button type="submit">Login</button>
         </form>
     )
@@ -37,8 +45,8 @@ function Login(props) {
         props.loginThunkCreator(formData);
     };
 
-    if(props.isAuth) {
-        return <Redirect to={`/myprofile`} />
+    if (props.isAuth) {
+        return <Redirect to={`/myprofile`}/>
     }
 
     return (
@@ -56,7 +64,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-        loginThunkCreator
+    loginThunkCreator
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

@@ -42,7 +42,7 @@ export const setAuthDataThunkCreator = () => {
 
 export const loginThunkCreator = (loginData) => {
     return (dispatch) => {
-        postLogin(loginData.email, loginData.password, loginData.rememberMe)
+        postLogin(loginData.email, loginData.password, loginData.rememberMe = false)
             .then(data => {
                 if(data.resultCode === 0) {
                     dispatch(setAuthDataThunkCreator());
