@@ -33,6 +33,7 @@ function LoginForm(props) {
                 name="rememberMe"
                 label={`remember me`}
             />
+            {props.error && <div>{props.error}</div>}
             <button type="submit">Login</button>
         </form>
     )

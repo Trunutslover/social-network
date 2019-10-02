@@ -1,4 +1,5 @@
 import {delLogin, getAuth, postLogin} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const SET_AUTH_DATA = `SET_AUTH_DATA`;
 
@@ -46,6 +47,8 @@ export const loginThunkCreator = (loginData) => {
             .then(data => {
                 if(data.resultCode === 0) {
                     dispatch(setAuthDataThunkCreator());
+                } else {
+                    dispatch(stopSubmit(`login`, {_error: data.messages[0]}));
                 }
             })
     }
