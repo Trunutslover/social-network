@@ -1,44 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './Profile.module.scss';
 import userpic from '../../assets/Userpic.png';
 
-export default class Profile extends React.Component {
-    state = {
-        editStatus: false,
-        status: this.props.status
+export default function Profile(props) {
+    const [editStatus, setEditStatus] = useState(false);
+    const [status, setStatus] = useState(props.status);
+
+    const onChangeStatus = (e) => {
+        setStatus(e.target.value)
     };
 
-    onChangeStatus = (e) => {
-        this.setState({
-            status: e.target.value
-        })
+    const enableEditStatus = () => {
+        setEditStatus(true)
     };
 
-    enableEditStatus = () => {
-        this.setState({
-            editStatus: true
-        })
+    const disableEditStatus = () => {
+        setEditStatus(false);
+        props.putMyStatus(status);
     };
 
-    disableEditStatus = () => {
-        this.setState({
-            editStatus: false
-        });
-        this.props.putMyStatus(this.state.status);
-    };
-
-    render() {
-        return (
-            <div className={classes.profile}>
-                <h2>{this.props.userProfile.fullName}</h2>
-                <img src={this.props.userProfile.photos.large || userpic} alt={`Avatar`}/>
-                <div>
-                    {this.state.editStatus
-                        ? <input value={this.state.status} onBlur={this.disableEditStatus} autoFocus={true} onChange={this.onChangeStatus}/>
-                        : <p onClick={this.props.userProfile.userId === this.props.myId && this.enableEditStatus}>{this.props.status || (this.props.userProfile.userId === this.props.myId && `Click here to change status`)}</p>
-                    }
-                </div>
+    return (
+        <div className={classes.profile}>
+            <h2>{props.userProfile.fullName}</h2>
+            <img src={props.userProfile.photos.large || userpic} alt={`Avatar`}/>
+            <div>
+                {editStatus
+                    ? <input value={status} onBlur={disableEditStatus} autoFocus={true}
+                             onChange={onChangeStatus}/>
+                    :
+                    <p onClick={props.userProfile.userId === props.myId && enableEditStatus}>{props.status || (props.userProfile.userId === props.myId && `Click here to change status`)}</p>
+                }
             </div>
-        )
-    }
+        </div>
+    )
 }
