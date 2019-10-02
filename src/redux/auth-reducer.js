@@ -30,7 +30,7 @@ export const setAuthData = (data, isAuth) => ({type: SET_AUTH_DATA, ...data, isA
 
 export const setAuthDataThunkCreator = () => {
     return (dispatch) => {
-        getAuth()
+        return getAuth()
             .then((data) => {
                 if (data.resultCode === 0) {
                     dispatch(setAuthData(data.data, true));

@@ -6,6 +6,7 @@ import profileReducer from "./profile-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
 import {reducer as formReducer} from "redux-form";
+import appReducer from "./app-reducer";
 
 const reducers = combineReducers({
     friendsPage: friendsReducer,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
     usersPage: usersReducer,
     profile: profileReducer,
     auth: authReducer,
-    form: formReducer
+    form: formReducer,
+    app: appReducer
 });
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
