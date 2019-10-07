@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import classes from './Profile.module.scss';
 import userpic from '../../assets/Userpic.png';
 
 export default function Profile(props) {
     const [editStatus, setEditStatus] = useState(false);
     const [status, setStatus] = useState(props.status);
+
+    useEffect(() => {
+        setStatus(props.status)
+    },
+        [props.status]);
 
     const onChangeStatus = (e) => {
         setStatus(e.target.value)
@@ -28,7 +33,7 @@ export default function Profile(props) {
                     ? <input value={status} onBlur={disableEditStatus} autoFocus={true}
                              onChange={onChangeStatus}/>
                     :
-                    <p onClick={props.userProfile.userId === props.myId && enableEditStatus}>{props.status || (props.userProfile.userId === props.myId && `Click here to change status`)}</p>
+                    <p onClick={props.userProfile.userId === props.myId ? enableEditStatus : undefined}>{props.status || (props.userProfile.userId === props.myId ? `Click here to change status` : undefined)}</p>
                 }
             </div>
         </div>

@@ -1,7 +1,7 @@
 /*Импорты*/
 import {getProfile, getStatus, putMyStatus} from "../api/api";
 
-/* Экшены */
+/* Константы экшенов */
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 /* Редьюсер */
-export default function profileReducer (state = initialState, action) {
+export default function profileReducer(state = initialState, action) {
     switch (action.type) {
         case SET_USER_PROFILE:
             return {
@@ -48,30 +48,24 @@ export const setStatus = (status) => {
 
 /* Санк криэйторы */
 export const setUserProfileThunkCreator = (userId) => {
-    return (dispatch) => {
-        getProfile(userId)
-            .then(data => {
-                dispatch(setUserProfile(data))
-            })
+    return async (dispatch) => {
+        const data = await getProfile(userId);
+        dispatch(setUserProfile(data))
     }
 };
 
 export const setStatusThunkCreator = (userId) => {
-    return (dispatch) => {
-        getStatus(userId)
-            .then(data => {
-                dispatch(setStatus(data))
-            })
+    return async (dispatch) => {
+        const data = await getStatus(userId);
+        dispatch(setStatus(data))
     }
 };
 
 export const putMyStatusThunkCreator = (status) => {
-    return (dispatch) => {
-        putMyStatus(status)
-            .then(data =>{
-                if(data.resultCode === 0) {
-                    dispatch(setStatus(status))
-                }
-            })
+    return async (dispatch) => {
+        const data = await putMyStatus(status);
+        if (data.resultCode === 0) {
+            dispatch(setStatus(status))
+        }
     }
 };

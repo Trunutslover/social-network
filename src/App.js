@@ -16,9 +16,9 @@ import Preloader from "./Components/common/Preloader/Preloader";
 
 
 class App extends React.Component {
-    componentDidMount() {
-        this.props.setAuthDataThunkCreator()
-            .then(this.props.setInitTrueAC);
+    async componentDidMount() {
+        await this.props.setAuthDataThunkCreator();
+        this.props.setInitTrueAC();
     }
 
     render() {

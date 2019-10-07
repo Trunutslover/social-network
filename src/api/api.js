@@ -8,47 +8,47 @@ const instance = axios.create({
     }
 });
 
-export const getUsers = (count = 10, pageNumber = 1) => {
-    return instance.get(`users?count=${count}&page=${pageNumber}`)
-        .then(response => response.data);
+export const getUsers = async (count = 10, pageNumber = 1) => {
+    const response = await instance.get(`users?count=${count}&page=${pageNumber}`);
+    return response.data;
 };
 
-export const getProfile = (userId) => {
-    return instance.get(`profile/${userId}`)
-        .then(response => response.data);
+export const getProfile = async (userId) => {
+    const response = await instance.get(`profile/${userId}`);
+    return response.data;
 };
 
-export const getAuth = () => {
-    return instance.get(`auth/me`)
-        .then(response => response.data);
+export const getAuth = async () => {
+    const response = await instance.get(`auth/me`);
+    return response.data;
 };
 
-export const postFollow = (userId) => {
-    return instance.post(`follow/${userId}`)
-        .then(response => response.data);
+export const postFollow = async (userId) => {
+    const response = await instance.post(`follow/${userId}`);
+    return response.data;
 };
 
-export const delFollow = (userId) => {
-    return instance.delete(`follow/${userId}`)
-        .then(response => response.data);
+export const delFollow = async (userId) => {
+    const response = await instance.delete(`follow/${userId}`);
+    return response.data;
 };
 
-export const getStatus = (userId) => {
-    return instance.get(`profile/status/${userId}`)
-        .then(response => response.data)
+export const getStatus = async (userId) => {
+    const response = await instance.get(`profile/status/${userId}`);
+    return response.data;
 };
 
-export const putMyStatus = (status) => {
-    return instance.put(`profile/status`, {status})
-        .then(response => response.data)
+export const putMyStatus = async (status) => {
+    const response = await instance.put(`profile/status`, {status});
+    return response.data;
 };
 
-export const postLogin = (email, password, rememberMe) => {
-    return instance.post(`auth/login`, {email, password, rememberMe})
-        .then(response => response.data)
+export const postLogin = async (email, password, rememberMe) => {
+    const response = await instance.post(`auth/login`, {email, password, rememberMe});
+    return response.data;
 };
 
-export const delLogin = () => {
-    return instance.delete(`auth/login`)
-        .then(response => response.data)
+export const delLogin = async () => {
+    const response = await instance.delete(`auth/login`);
+    return response.data;
 };

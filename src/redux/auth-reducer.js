@@ -29,38 +29,32 @@ export default function authReducer(state = initialState, action) {
 export const setAuthData = (data, isAuth) => ({type: SET_AUTH_DATA, ...data, isAuth});
 
 export const setAuthDataThunkCreator = () => {
-    return (dispatch) => {
-        return getAuth()
-            .then((data) => {
-                if (data.resultCode === 0) {
-                    dispatch(setAuthData(data.data, true));
-                } else {
-                    dispatch(setAuthData({id: null, email: null, login: null}, false))
-                }
-            })
+    return async (dispatch) => {
+        const data = await getAuth();
+        if (data.resultCode === 0) {
+            dispatch(setAuthData(data.data, true));
+        } else {
+            dispatch(setAuthData({id: null, email: null, login: null}, false))
+        }
     }
 };
 
 export const loginThunkCreator = (loginData) => {
-    return (dispatch) => {
-        postLogin(loginData.email, loginData.password, loginData.rememberMe = false)
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(setAuthDataThunkCreator());
-                } else {
-                    dispatch(stopSubmit(`login`, {_error: data.messages[0]}));
-                }
-            })
+    return async (dispatch) => {
+        const data = await postLogin(loginData.email, loginData.password, loginData.rememberMe = false);
+        if (data.resultCode === 0) {
+            dispatch(setAuthDataThunkCreator());
+        } else {
+            dispatch(stopSubmit(`login`, {_error: data.messages[0]}));
+        }
     }
 };
 
 export const logoutThunkCreator = () => {
-    return (dispatch) => {
-        delLogin()
-            .then(data => {
-                if(data.resultCode === 0) {
-                    dispatch(setAuthDataThunkCreator())
-                }
-            })
+    return async (dispatch) => {
+        const data = await delLogin();
+        if (data.resultCode === 0) {
+            dispatch(setAuthDataThunkCreator())
+        }
     }
 };
