@@ -36,37 +36,3 @@
 .name {
   margin: 0;
 }
-
-.pagination {
-  padding: 10px;
-}
-
-.pageButton {
-  width: 30px;
-  height: 30px;
-  margin: 0;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  padding: 0;
-  box-sizing: border-box;
-
-  border: 1px solid black;
-  border-radius: 5px;
-  
-  background-color: white;
-  
-  &:hover {
-    cursor: pointer;
-    background-color: #375e88;
-    color: white;
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
-.activePage {
-   font-weight: bold;
-   background-color: #4d76a3;
- }

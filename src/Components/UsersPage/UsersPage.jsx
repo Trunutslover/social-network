@@ -2,25 +2,9 @@ import React from 'react';
 import classes from './UsersPage.module.scss';
 import userpic from '../../assets/Userpic.png'
 import {NavLink} from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
 
 export default function UsersPage(props) {
-    const pagesCount = Math.ceil(props.totalCount / props.count);
-
-    const buttons = [];
-
-    for (let i = 1; i <= pagesCount; i++) {
-        buttons.push(i);
-    }
-
-    const buttonsList = buttons.map((value, index) => {
-        return <button key={index} className={`${classes.pageButton} ${value === props.page && classes.activePage}`}
-                       onClick={() => {
-                           props.onPageChanged(value)
-                       }}>
-            {value}
-        </button>
-    });
-
     const userList = props.users.map((value) => {
         return (
             <div key={value.id} className={classes.user}>
@@ -53,7 +37,12 @@ export default function UsersPage(props) {
 
     return (
         <div>
-            <div className={classes.pagination}>{buttonsList}</div>
+            <Paginator
+                totalCount={props.totalCount}
+                count={props.count}
+                page={props.page}
+                onPageChanged={props.onPageChanged}
+            />
             <div className={classes.users}>{userList}</div>
         </div>
     )
