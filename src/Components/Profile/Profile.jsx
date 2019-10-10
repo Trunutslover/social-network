@@ -24,16 +24,23 @@ export default function Profile(props) {
         props.putMyStatus(status);
     };
 
+    const updateMyPhoto = (e) => {
+        props.putMyPhoto(e.target.files[0], props.myId);
+    };
+
     return (
         <div className={classes.profile}>
             <h2>{props.userProfile.fullName}</h2>
             <img src={props.userProfile.photos.large || userpic} alt={`Avatar`}/>
+            <br/>
+            {props.userProfile.userId === props.myId ? <input type={`file`} onChange={updateMyPhoto} /> : null}
             <div>
+                <b>Status: </b>
                 {editStatus
                     ? <input value={status} onBlur={disableEditStatus} autoFocus={true}
                              onChange={onChangeStatus}/>
                     :
-                    <p onClick={props.userProfile.userId === props.myId ? enableEditStatus : undefined}>{props.status || (props.userProfile.userId === props.myId ? `Click here to change status` : undefined)}</p>
+                    <span onClick={props.userProfile.userId === props.myId ? enableEditStatus : undefined}>{props.status || (props.userProfile.userId === props.myId ? `Click here to change status` : undefined)}</span>
                 }
             </div>
         </div>

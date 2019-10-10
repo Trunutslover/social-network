@@ -1,5 +1,5 @@
 /*Импорты*/
-import {getProfile, getStatus, putMyStatus} from "../api/api";
+import {getProfile, getStatus, putMyStatus, putPhoto} from "../api/api";
 
 /* Константы экшенов */
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -50,6 +50,7 @@ export const setStatus = (status) => {
 export const setUserProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         const data = await getProfile(userId);
+        debugger
         dispatch(setUserProfile(data))
     }
 };
@@ -66,6 +67,15 @@ export const putMyStatusThunkCreator = (status) => {
         const data = await putMyStatus(status);
         if (data.resultCode === 0) {
             dispatch(setStatus(status))
+        }
+    }
+};
+
+export const putMyPhotoThunkCreator = (photo, myId) => {
+    return async (dispatch) => {
+        const data = await putPhoto(photo);
+        if(data.resultCode === 0) {
+            dispatch(setUserProfileThunkCreator(myId));
         }
     }
 };

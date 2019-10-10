@@ -52,3 +52,13 @@ export const delLogin = async () => {
     const response = await instance.delete(`auth/login`);
     return response.data;
 };
+
+export const putPhoto = async (photo) => {
+    const formData = new FormData();
+    formData.append(`image`, photo);
+
+    const response = await instance.put(`profile/photo`, formData, {
+        headers: {'Content-Type': 'multipart/form-data'}
+    });
+    return response.data;
+};

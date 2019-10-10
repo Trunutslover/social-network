@@ -1,7 +1,12 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {putMyStatusThunkCreator, setStatusThunkCreator, setUserProfileThunkCreator} from "../../redux/profile-reducer";
+import {
+    putMyPhotoThunkCreator,
+    putMyStatusThunkCreator,
+    setStatusThunkCreator,
+    setUserProfileThunkCreator
+} from "../../redux/profile-reducer";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {withRouter} from "react-router-dom";
@@ -23,7 +28,9 @@ class ProfileContainer extends React.Component{
                 userProfile={this.props.userProfile}
                 status={this.props.status}
                 myId={this.props.myId}
-                putMyStatus={this.props.putMyStatusThunkCreator}/>
+                putMyStatus={this.props.putMyStatusThunkCreator}
+                putMyPhoto={this.props.putMyPhotoThunkCreator}
+            />
         )
     }
 }
@@ -39,7 +46,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     setUserProfileThunkCreator,
     setStatusThunkCreator,
-    putMyStatusThunkCreator
+    putMyStatusThunkCreator,
+    putMyPhotoThunkCreator
 };
 
 export default compose(
