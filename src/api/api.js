@@ -62,3 +62,8 @@ export const putPhoto = async (photo) => {
     });
     return response.data;
 };
+
+export const putProfile = async (profile) => {
+    const response = await instance.put(`profile`, profile);
+    return response.data;
+};

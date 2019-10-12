@@ -1,5 +1,6 @@
 /*Импорты*/
-import {getProfile, getStatus, putMyStatus, putPhoto} from "../api/api";
+import {getProfile, getStatus, putMyStatus, putPhoto, putProfile} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 /* Константы экшенов */
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -50,7 +51,6 @@ export const setStatus = (status) => {
 export const setUserProfileThunkCreator = (userId) => {
     return async (dispatch) => {
         const data = await getProfile(userId);
-        debugger
         dispatch(setUserProfile(data))
     }
 };
@@ -76,6 +76,19 @@ export const putMyPhotoThunkCreator = (photo, myId) => {
         const data = await putPhoto(photo);
         if(data.resultCode === 0) {
             dispatch(setUserProfileThunkCreator(myId));
+        }
+    }
+};
+
+export const putMyProfileThunkCreator = (profile, myId) => {
+    return async (dispatch) => {
+        const data = await putProfile(profile);
+        if(data.resultCode === 0) {
+            dispatch(setUserProfileThunkCreator(myId));
+        } else {
+            debugger
+            dispatch(stopSubmit(`profileEditForm`, {_error: data.messages[0]}));
+            return Promise.reject(data.messages[0]);
         }
     }
 };

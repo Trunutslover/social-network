@@ -2,7 +2,7 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {
-    putMyPhotoThunkCreator,
+    putMyPhotoThunkCreator, putMyProfileThunkCreator,
     putMyStatusThunkCreator,
     setStatusThunkCreator,
     setUserProfileThunkCreator
@@ -30,6 +30,7 @@ class ProfileContainer extends React.Component{
                 myId={this.props.myId}
                 putMyStatus={this.props.putMyStatusThunkCreator}
                 putMyPhoto={this.props.putMyPhotoThunkCreator}
+                putMyProfile={this.props.putMyProfileThunkCreator}
             />
         )
     }
@@ -47,7 +48,8 @@ const mapDispatchToProps = {
     setUserProfileThunkCreator,
     setStatusThunkCreator,
     putMyStatusThunkCreator,
-    putMyPhotoThunkCreator
+    putMyPhotoThunkCreator,
+    putMyProfileThunkCreator
 };
 
 export default compose(
