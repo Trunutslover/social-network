@@ -1,16 +1,16 @@
-import appReducer, {setInitTrueAC} from "./app-reducer";
+import appReducer, { setInitTrueAC } from './app-reducer'
 
 const state = {
-    initialized: false
-};
+  initialized: false
+}
 
-it('should initialized be true', function () {
-    // 1. Test data
-    const action = setInitTrueAC();
+it('should initialized be true', function() {
+  // 1. Test data
+  const action = setInitTrueAC()
 
-    // 2. Action
-    const newState = appReducer(state, action);
+  // 2. Action
+  const newState = appReducer(state, action)
 
-    // 3. Expectation
-    expect(newState.initialized).toBe(true);
-});
+  // 3. Expectation
+  expect(newState.initialized).toBe(true)
+})
