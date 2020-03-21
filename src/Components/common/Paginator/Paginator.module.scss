@@ -1,5 +1,12 @@
 .pagination {
+  display: flex;
   padding: 10px;
+  > button {
+    margin-right: 5px;
+  }
+  > button:last-child {
+    margin-right: 0;
+  }
 }
 
 .pageButton,

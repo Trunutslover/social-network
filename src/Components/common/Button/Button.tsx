@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
+import { switchProp } from 'styled-tools'
 
 interface IButtonProps {
-
+  variety?: 'green'
 }
 
 const Button = styled.button<IButtonProps>(() => ({
@@ -11,13 +12,25 @@ const Button = styled.button<IButtonProps>(() => ({
   padding: '5px 10px',
   border: 'none',
   fontWeight: 'bold',
-  color: '#FFFFFF',
+  color: '#000000',
   textTransform: 'uppercase',
-  backgroundColor: '#00cc00',
+  backgroundColor: '#eeeeee',
   borderRadius: '5px',
   '&:hover': {
-    backgroundColor: '#00cccc',
-  }
-}))
+    cursor: 'pointer',
+    backgroundColor: '#dddddd',
+  },
+}),
+  switchProp('variety', {
+    green: {
+      color: '#FFFFFF',
+      backgroundColor: '#00cc00',
+      '&:hover': {
+        cursor: 'pointer',
+        backgroundColor: '#00cccc',
+      },
+    },
+  })
+)
 
 export default Button

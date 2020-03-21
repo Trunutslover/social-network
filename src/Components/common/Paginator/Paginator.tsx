@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react'
 import classes from './Paginator.module.scss'
+import Button from '../Button/Button'
 
 interface IPaginatorProps {
   totalCount: number
@@ -26,15 +27,15 @@ const Paginator: FC<IPaginatorProps> = props => {
 
   const buttonsList = buttons.map((value, index) => {
     return (
-      <button
+      <Button
         key={index}
-        className={`${classes.pageButton} ${value === props.page && classes.activePage}`}
+        variety={value === props.page ? 'green' : undefined}
         onClick={() => {
           props.onPageChanged(value)
         }}
       >
         {value}
-      </button>
+      </Button>
     )
   })
 
@@ -45,15 +46,15 @@ const Paginator: FC<IPaginatorProps> = props => {
   return (
     <div className={classes.pagination}>
       {currentPortion > 0 ? (
-        <button className={classes.prevButton} onClick={() => setCurrentPortion(currentPortion - 1)}>
+        <Button onClick={() => setCurrentPortion(currentPortion - 1)}>
           Prev
-        </button>
+        </Button>
       ) : null}
       {buttonsListFiltered}
       {currentPortion < Math.ceil(pagesCount / portionSize) ? (
-        <button className={classes.nextButton} onClick={() => setCurrentPortion(currentPortion + 1)}>
+        <Button onClick={() => setCurrentPortion(currentPortion + 1)}>
           Next
-        </button>
+        </Button>
       ) : null}
     </div>
   )
